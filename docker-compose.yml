@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  n8n:
+    image: docker.n8n.io/n8nio/n8n
+    container_name: n8n_week1_67712380    # ตั้งชื่อคอนเทนเนอร์เป็น "n8n_week1_67712380"
+    restart: always    # ตั้งคอนเทนเนอร์ให้รีสตาร์ทเสมอเมื่อเกิดปัญหาหรือรีบูตเครื่อง
+
+    ports:
+      - "5678:5678"   # เปลี่ยนพอร์ตที่เครื่องของคุณให้เข้าถึงได้ที่พอร์ต 8080
+
+    environment:
+      - TZ=Asia/Bangkok    # ตั้งค่าโซนเวลาเป็น Asia/Bangkok
+      - N8N_BASIC_AUTH_ACTIVE=true    # เปิดใช้งาน Basic Authentication
+      - N8N_BASIC_AUTH_USER=admin    # ตั้งชื่อผู้ใช้สำหรับการเข้าสู่ระบบ
+      - N8N_BASIC_AUTH_PASSWORD=admin123    # ตั้งรหัสผ่านสำหรับการเข้าสู่ระบบ
+
+    volumes:
+      - ./n8n_data:/home/node/.n8n    # เชื่อมโยงโฟลเดอร์ `n8n_data` จากเครื่องของคุณไปยังคอนเทนเนอร์เพื่อเก็บข้อมูล
